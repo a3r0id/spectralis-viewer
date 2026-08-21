@@ -29,6 +29,11 @@ interface FileUploadDropZoneProps {
     /** The class name of the drop zone. */
     className?: string;
     /**
+     * Visual density. `sm` lays the zone out horizontally for use in toolbars.
+     * @default "md"
+     */
+    size?: "sm" | "md";
+    /**
      * A hint text explaining what files can be dropped.
      */
     hint?: string;
@@ -68,6 +73,7 @@ interface FileUploadDropZoneProps {
 
 export const FileUploadDropZone = ({
     className,
+    size = "md",
     hint,
     isDisabled,
     accept,
@@ -81,6 +87,7 @@ export const FileUploadDropZone = ({
     const inputRef = useRef<HTMLInputElement>(null);
     const [isInvalid, setIsInvalid] = useState(false);
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+    const isCompact = size === "sm";
 
     const isFileTypeAccepted = (file: File): boolean => {
         if (!accept) return true;
@@ -199,16 +206,23 @@ export const FileUploadDropZone = ({
             onDragEnd={handleDragOut}
             onDrop={handleDrop}
             className={cx(
-                "relative flex flex-col items-center rounded-xl text-tertiary transition duration-100 ease-linear",
+                "relative flex items-center rounded-xl text-tertiary ring-1 ring-secondary transition duration-100 ease-linear ring-inset",
+                isCompact ? "flex-row gap-2.5 px-3 py-2" : "flex-col gap-3 px-6 py-5",
                 isDraggingOver && "ring-2 ring-brand",
                 isDisabled && "cursor-not-allowed bg-secondary",
                 className,
             )}
         >
-            <FeaturedIcon icon={UploadCloud02} color="gray" theme="modern" size="md" className={cx(isDisabled && "opacity-50")} />
+            <FeaturedIcon
+                icon={UploadCloud02}
+                color="gray"
+                theme="modern"
+                size={isCompact ? "sm" : "md"}
+                className={cx(isDisabled && "opacity-50")}
+            />
 
-            <div className="flex flex-col gap-1 text-center">
-                <div className="flex justify-center gap-1 text-center">
+            <div className={cx("flex flex-col gap-1", isCompact ? "text-left" : "text-center")}>
+                <div className={cx("flex gap-1", isCompact ? "justify-start" : "justify-center")}>
                     <input
                         ref={inputRef}
                         id={id}
@@ -220,14 +234,12 @@ export const FileUploadDropZone = ({
                         onChange={handleInputFileChange}
                     />
                     <label htmlFor={id} className="flex cursor-pointer">
-                        <Button color="link-color" size="md" isDisabled={isDisabled} onClick={() => inputRef.current?.click()}>
+                        <Button color="link-color" size={isCompact ? "sm" : "md"} isDisabled={isDisabled} onClick={() => inputRef.current?.click()}>
                             Upload
                         </Button>
                     </label>
                 </div>
-                <p className={cx("text-xs transition duration-100 ease-linear", isInvalid && "text-error-primary")}>
-                    {hint}
-                </p>
+                {hint ? <p className={cx("text-xs transition duration-100 ease-linear", isInvalid && "text-error-primary")}>{hint}</p> : null}
             </div>
         </div>
     );

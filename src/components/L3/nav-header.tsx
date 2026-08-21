@@ -34,9 +34,11 @@ interface HeaderNavigationBaseProps {
 const UploadActions = ({
     onFileChange,
     fileName,
+    size = "sm",
 }: {
     onFileChange?: (file: File) => void;
     fileName?: string | null;
+    size?: "sm" | "md";
 }) => {
     if (!onFileChange) return null;
 
@@ -47,7 +49,13 @@ const UploadActions = ({
                     {fileName}
                 </p>
             ) : null}
-            <FileUploadDropZone allowsMultiple={false} accept=".bin,application/octet-stream" onDropFiles={(files) => onFileChange(files[0])} />
+            <FileUploadDropZone
+                size={size}
+                allowsMultiple={false}
+                accept=".bin,application/octet-stream"
+                hint={size === "md" ? "{timestamp}.spectralis.session.bin" : undefined}
+                onDropFiles={(files) => onFileChange(files[0])}
+            />
         </div>
     );
 };
@@ -66,7 +74,7 @@ export const NavHeader = ({ activeUrl, items, hideBorder = false, actions, onFil
                     </div>
                     <NavList activeUrl={activeUrl} items={items} />
                     <div className="mt-auto p-4">
-                        <UploadActions onFileChange={onFileChange} fileName={fileName} />
+                        <UploadActions onFileChange={onFileChange} fileName={fileName} size="md" />
                     </div>
                 </aside>
             </MobileNavigationHeader>
@@ -85,6 +93,7 @@ export const NavHeader = ({ activeUrl, items, hideBorder = false, actions, onFil
                                         <NavButton
                                             current={isActive(item)}
                                             href={item.href}
+                                            className={cx("w-auto", isActive(item) ? "text-primary" : "text-tertiary hover:text-secondary")}
                                             onClick={(event) => {
                                                 event.preventDefault();
                                                 navigate(item.href);

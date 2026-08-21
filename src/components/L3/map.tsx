@@ -21,7 +21,7 @@ const basemapStyle: StyleSpecification = {
             ],
             tileSize: 256,
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                '<a href="https://maplibre.org/about/">MapLibre</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         },
     },
     layers: [

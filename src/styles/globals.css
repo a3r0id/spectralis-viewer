@@ -31,6 +31,7 @@
 html,
 body {
     font-family: var(--font-body);
+    color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-variant-ligatures: contextual;
@@ -70,26 +71,20 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* MapLibre attribution — match dark app chrome */
 .maplibregl-ctrl-attrib {
-    background-color: rgb(15 23 42 / 0.75) !important;
-    color: var(--color-text-tertiary, #94a3b8) !important;
-    border-radius: 6px 0 0 0;
-    font-size: 10px;
-    line-height: 1.3;
+    background-color: #3f3f3f !important;
+    color: #ffffff !important;
 }
-
-.maplibregl-ctrl-attrib a {
-    color: var(--color-text-secondary, #cbd5e1) !important;
-}
-
-.maplibregl-ctrl-attrib.maplibregl-compact {
-    background-color: rgb(15 23 42 / 0.75) !important;
-    min-height: 24px;
-}
-
-.maplibregl-ctrl-attrib-button {
+.maplibregl-ctrl-attrib > * {
     background-color: transparent !important;
+    color: #ffffff !important;
+}
+.maplibregl-ctrl-attrib-inner>a {
+    color: #ffffff !important;
+}
+.maplibregl-ctrl-attrib-button {
+    filter: invert(1);
 }
 
-.maplibregl-ctrl-bottom-right .maplibregl-ctrl {
+/* .maplibregl-ctrl-bottom-right .maplibregl-ctrl {
     margin: 0 8px 8px 0;
-}
+} */
