@@ -3,6 +3,11 @@
 A browser-based dashboard for inspecting Spectralis honeypot session files. Files
 are parsed locally so captured payloads do not need to be uploaded to a server.
 
+<img width="2556" height="1223" alt="image" src="https://github.com/user-attachments/assets/f4a59971-f778-43c0-bb16-a92d7c6ed910" />
+
+<img width="2556" height="1227" alt="image" src="https://github.com/user-attachments/assets/5b940b38-1725-4a8c-8f95-21ac4e89a843" />
+
+
 ## Features
 
 - Open `.spectralis.session.bin` files by selecting or dropping them
